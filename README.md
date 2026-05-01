@@ -1,15 +1,17 @@
 <p align="center">
   <img src="imgs/card_crop.png" width="50%"/>
   <br>
-</p>
-
 
 ![Static Badge](https://img.shields.io/badge/status-active-brightgreen)
 ![GitHub contributors](https://img.shields.io/github/contributors/estjava/NekoDL)
 ![GitHub release](https://img.shields.io/github/release/estjava/NekoDL.svg?logo=github)
 ![GitHub downloads](https://img.shields.io/github/downloads/estjava/NekoDL/latest/total.svg?logo=github)
 
+</p>
+
 ## Dependency
+<p align="center">
+
 ![GitHub Pipenv locked dependency version](https://img.shields.io/github/pipenv/locked/dependency-version/estjava/NekoDL/requests)
 ![GitHub Pipenv locked dependency version](https://img.shields.io/github/pipenv/locked/dependency-version/estjava/NekoDL/chardet)
 ![GitHub Pipenv locked dependency version](https://img.shields.io/github/pipenv/locked/dependency-version/estjava/NekoDL/ffmpeg-python)
@@ -17,6 +19,8 @@
 ![GitHub Pipenv locked dependency version](https://img.shields.io/github/pipenv/locked/dependency-version/estjava/NekoDL/beautifulsoup4)
 ![GitHub Pipenv locked dependency version](https://img.shields.io/github/pipenv/locked/dependency-version/estjava/NekoDL/yt-dlp)
 ![GitHub Pipenv locked dependency version](https://img.shields.io/github/pipenv/locked/dependency-version/estjava/NekoDL/cloudscraper)
+
+</p>
 
 ## Links
 - [Download](https://github.com/estjava/NekoDL/releases/latest)
