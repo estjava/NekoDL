@@ -5,7 +5,8 @@
 
 [![GitHub release](https://img.shields.io/github/release/estjava/NekoDL.svg?logo=github)](https://github.com/estjava/NekoDL/releases/latest)
 [![GitHub downloads](https://img.shields.io/github/downloads/estjava/NekoDL/latest/total.svg?logo=github)](https://github.com/estjava/NekoDL/releases/latest)
-[![GitHub downloads](https://img.shields.io/github/downloads/estjava/NekoDL/total.svg?logo=github)](https://github.com/estjava/NekoDL/releases)
+[![Static Badge](https://img.shields.io/badge/status-active-brightgreen)]
+
 
 ## Links
 - [Download](https://github.com/estjava/NekoDL/releases/latest)
@@ -16,7 +17,9 @@
 
 
 ## Demo
-<img align="center" src="imgs/how_to_download.gif">
+<p align="center">
+  <img src="imgs/how_to_download.gif"/>
+</p>
 
 ## Features
 - 🍰 Simple and clear user interface
