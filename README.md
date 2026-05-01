@@ -3,6 +3,7 @@
   <br>
 </p>
 
+![Static Badge](https://img.shields.io/badge/status-active-brightgreen?style=flat)
 ![GitHub contributors](https://img.shields.io/github/contributors/estjava/NekoDL?style=flat)
 ![GitHub License](https://img.shields.io/github/license/estjava/NekoDL?style=flat)
 ![GitHub release](https://img.shields.io/github/release/estjava/NekoDL.svg?logo=github?style=flat)
