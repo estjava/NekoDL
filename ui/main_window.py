@@ -7,14 +7,8 @@ Dark industrial aesthetic — dense, functional, no-nonsense downloader UI.
 import os
 import sys
 
-from PyQt5.QtWidgets import (
-    QMainWindow, QWidget, QVBoxLayout, QHBoxLayout,
-    QLineEdit, QPushButton, QListWidget, QListWidgetItem,
-    QLabel, QProgressBar, QTextEdit, QSplitter,
-    QStatusBar, QAction, QMenuBar, QFileDialog,
-    QAbstractItemView, QFrame, QComboBox, QSizePolicy,
-    QMessageBox,
-)
+
+from PyQt5.QtWidgets import (QMainWindow, QWidget, QVBoxLayout, QHBoxLayout,QLineEdit, QPushButton, QListWidget, QListWidgetItem,QLabel, QProgressBar, QTextEdit, QSplitter,QStatusBar, QAction, QMenuBar, QFileDialog,QAbstractItemView, QFrame, QComboBox, QSizePolicy,QMessageBox,)
 from PyQt5.QtCore    import Qt, QSize, pyqtSlot, QThread
 from PyQt5.QtGui     import QFont, QColor, QPalette, QIcon, QFontDatabase
 
@@ -293,8 +287,7 @@ class MainWindow(QMainWindow):
 
         self.url_input = QLineEdit()
         self.url_input.setObjectName('urlInput')
-        self.url_input.setPlaceholderText(
-            'Paste URL here…  (YouTube, Webtoon, and more)')
+        self.url_input.setPlaceholderText('Paste URL here…  (YouTube, Webtoon, and more)')
         self.url_input.returnPressed.connect(self._on_download)
 
         self.btn_download = QPushButton('DOWNLOAD')
@@ -330,8 +323,7 @@ class MainWindow(QMainWindow):
         self.queue_list = QListWidget()
         self.queue_list.setObjectName('queueList')
         self.queue_list.setAlternatingRowColors(True)
-        self.queue_list.setSelectionMode(
-            QAbstractItemView.ExtendedSelection)
+        self.queue_list.setSelectionMode(QAbstractItemView.ExtendedSelection)
         self.queue_list.setSpacing(1)
         qp_layout.addWidget(self.queue_list)
 
