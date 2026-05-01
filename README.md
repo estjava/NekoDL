@@ -3,18 +3,20 @@
   <br>
 </p>
 
-[![GitHub release](https://img.shields.io/github/release/KurtBestor/Hitomi-Downloader.svg?logo=github)](https://github.com/KurtBestor/Hitomi-Downloader/releases/latest)
-[![GitHub downloads](https://img.shields.io/github/downloads/KurtBestor/Hitomi-Downloader/latest/total.svg?logo=github)](https://github.com/KurtBestor/Hitomi-Downloader/releases/latest)
-[![GitHub downloads](https://img.shields.io/github/downloads/KurtBestor/Hitomi-Downloader/total.svg?logo=github)](https://github.com/KurtBestor/Hitomi-Downloader/releases)
+[![GitHub release](https://img.shields.io/github/release/estjava/NekoDL.svg?logo=github)](https://github.com/estjava/NekoDL/releases/latest)
+[![GitHub downloads](https://img.shields.io/github/downloads/estjava/NekoDL/latest/total.svg?logo=github)](https://github.com/estjava/NekoDL/releases/latest)
+[![GitHub downloads](https://img.shields.io/github/downloads/estjava/NekoDL/total.svg?logo=github)](https://github.com/estjava/NekoDL/releases)
 
 ## Links
-- [Download](https://github.com/KurtBestor/Hitomi-Downloader/releases/latest)
-- [Issues](https://github.com/KurtBestor/Hitomi-Downloader/issues)
-- [Scripts & Plugins](https://github.com/KurtBestor/Hitomi-Downloader/wiki/Scripts-&-Plugins)
-- [Chrome Extension](https://github.com/KurtBestor/Hitomi-Downloader/wiki/Chrome-Extension)
+- [Download](https://github.com/estjava/NekoDL/releases/latest)
+- [Issues](https://github.com/estjava/NekoDL/issues)
+- [Scripts & Plugins](https://github.com/estjava/NekoDL/wiki/Scripts-&-Plugins)
+- [Chrome Extension](https://github.com/estjava/NekoDL/wiki/Chrome-Extension)
+
+
 
 ## Demo
-<img src="imgs/how_to_download.gif">
+<img align="center" src="imgs/how_to_download.gif">
 
 ## Features
 - 🍰 Simple and clear user interface
