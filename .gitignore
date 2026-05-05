@@ -101,5 +101,8 @@ ENV/
 .mypy_cache/
 
 # etc
-#*.bat
+*.bat
 call cmd.bat
+.github
+.temp
+.vscode

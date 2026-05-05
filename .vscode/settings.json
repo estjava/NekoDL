@@ -1,7 +1,5 @@
 {
-    "python.testing.pytestArgs": [
-        "."
-    ],
-    "python.testing.unittestEnabled": false,
-    "python.testing.pytestEnabled": true
+    "python.analysis.typeCheckingMode": "off",
+    "python.pythonPath": ".venv\\Scripts\\python.exe",
+    "python-envs.defaultEnvManager": "ms-python.python:pipenv"
 }

@@ -267,19 +267,19 @@ class MainWindow(QMainWindow):
         root.setSpacing(8)
 
         # ── Header ────────────────────────────────────────────────────────
-        hdr = QHBoxLayout()
-        hdr.setSpacing(0)
-        lbl_app = QLabel(constants.APP_NAME)
-        lbl_app.setStyleSheet(
-            'color: #ff4d4d; font-size: 20px; font-weight: bold; '
-            'letter-spacing: 4px; font-family: Consolas;'
-        )
-        lbl_ver = QLabel(f'  v{constants.VERSION}')
-        lbl_ver.setStyleSheet('color: #333; font-size: 11px; padding-top: 6px;')
-        hdr.addWidget(lbl_app)
-        hdr.addWidget(lbl_ver)
-        hdr.addStretch()
-        root.addLayout(hdr)
+        # hdr = QHBoxLayout()
+        # hdr.setSpacing(0)
+        # lbl_app = QLabel(constants.APP_NAME)
+        # lbl_app.setStyleSheet(
+        #     'color: #ff4d4d; font-size: 20px; font-weight: bold; '
+        #     'letter-spacing: 4px; font-family: Consolas;'
+        # )
+        # lbl_ver = QLabel(f'  v{constants.VERSION}')
+        # lbl_ver.setStyleSheet('color: #333; font-size: 11px; padding-top: 6px;')
+        # hdr.addWidget(lbl_app)
+        # dr.addWidget(lbl_ver)
+        # hdr.addStretch()
+        # root.addLayout(hdr)
 
         # ── URL input row ──────────────────────────────────────────────────
         url_row = QHBoxLayout()
