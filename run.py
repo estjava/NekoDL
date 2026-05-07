@@ -1,106 +1,112 @@
+import os
 import requests
-from collections import defaultdict
+import time
+from dotenv import load_dotenv
+from pathlib import Path
+import random
+import re
 
-BASE_API = "https://nhentai.net/api/v2/galleries/{}"
-
-CDN_POOL = ["i1", "i2", "i3", "i4"]
-CDN_FALLBACK_ORDER = ["i1", "i2", "i3", "i4"]
-CDN_CACHE = {}
-
-def fetch_gallery(gal_id: str) -> dict:
-    url = BASE_API.format(gal_id)
-
-    res = requests.get(url, timeout=10)
-    if res.status_code != 200:
-        raise Exception(f"Gallery {gal_id} not found")
-
-    return res.json()
-
-def extract_id(url: str) -> str:
-    return url.split("/g/")[1].strip("/")
-
-def group_tags(tags: list[dict]) -> dict:
-    grouped = defaultdict(list)
-
-    for t in tags:
-        grouped[t["type"]].append(t["name"])
-
-    return grouped
-
-def get_best_cdn() -> str:
-    # bisa diganti health-check nanti
-    return CDN_FALLBACK_ORDER[0]
-
-def build_image_url(path: str, media_id: str, page: int) -> str:
-    """
-    fallback chain: i1 -> i4
-    cache key per page
-    """
-
-    cache_key = f"{media_id}:{page}"
-
-    if cache_key in CDN_CACHE:
-        return CDN_CACHE[cache_key]
-
-    for sub in CDN_FALLBACK_ORDER:
-        url = f"https://{sub}.nhentai.net/{path}"
-
-        # optional: lazy validation (bisa dimatikan kalau mau cepat)
-        try:
-            r = requests.head(url, timeout=3)
-            if r.status_code == 200:
-                CDN_CACHE[cache_key] = url
-                return url
-        except:
-            continue
-
-    # fallback terakhir
-    url = f"https://i1.nhentai.net/{path}"
-    CDN_CACHE[cache_key] = url
-    return 
-
-def parse_gallery(gal_id: str) -> dict:
-    data = fetch_gallery(gal_id)
-    tags = group_tags(data.get("tags", []))
-
-    media_id = data["media_id"]
-
-    images = [
-        build_image_url(page["path"], media_id, i + 1)
-        for i, page in enumerate(data["pages"])
-    ]
-
-    return {
-        "id": data["id"],
-        "title": data["title"]["pretty"],
-        "media_id": media_id,
-        "pages": data["num_pages"],
-
-        "images": images,
-
-        "categories": tags.get("category", []),
-        "parodies": tags.get("parody", []),
-        "artists": tags.get("artist", []),
-        "groups": tags.get("group", []),
-        "languages": tags.get("language", []),
-        "tags": tags.get("tag", []),
-    }
-
-def fmt(v):
-    return ", ".join(v) if v else "-"
+load_dotenv(dotenv_path=Path(__file__).parent / ".env")
+API = os.getenv("API_KEY")
+APP = os.getenv("APP_NAME")
 
 
-if __name__ == "":
-    url = "https://nhentai.net/g/571652"
+class NHentaiClient:
+    BASE_URL = "https://nhentai.net/api/v2"
 
-    gid = extract_id(url)
-    result = parse_gallery(gid)
+    def __init__(self, api=API, apps=APP):
+        self.session = requests.Session()
+        headers = {
+            "accept": "application/json",
+            "User-Agent": apps
+        }
+        if api:
+            headers["Authorization"] = f"Key {api}"
+        self.session.headers.update(headers)
 
-    print("TITLE      :", result["title"])
-    print("PARODIES   :", fmt(result["parodies"]))
-    print("TAGS       :", fmt(result["title"]))
-    print("ARTISTS    :", fmt(result["artists"]))
-    print("GROUP      :", fmt(result["groups"]))
-    print("LANGUAGES  :", fmt(result["languages"]))
-    print("CATEGORIES :", fmt(result["categories"]))
-    print("PAGES      :", result["pages"])
+    def _get(self, path, params=None, retries=3):
+        url = self.BASE_URL + path
+        for i in range(retries):
+            try:
+                res = self.session.get(url, params=params, timeout=30)
+                res.raise_for_status()
+                return res.json()
+            except requests.exceptions.ConnectTimeout:
+                time.sleep(2 ** i)
+            except (requests.exceptions.ConnectionError,
+                    requests.exceptions.HTTPError):
+                break
+        return None
+
+    def get_info(self, id):
+        gal = self._get(f"/galleries/{id}")  # _get already returns parsed JSON
+        if gal is None:
+            return None
+        id          = gal['id']
+        id_media    = gal['media_id']
+        title       = gal['title']['english']
+        artists     = []
+        groups      = []
+        series      = []
+        languages   = []
+        tags        = []
+        for tag in gal['tags']:
+            type = tag['type']
+            if type == 'artist':
+                artists = tag['name']
+            elif type == 'group':
+                groups = tag['name']
+            elif type == 'parody':
+                series = tag['name']
+            elif type == 'language':
+                languages = tag['name']
+            elif type == 'category':
+                category = tag['name']
+            elif type == 'tag':
+                tags = tag['name']
+
+        return {
+            "id"        : id,
+            "id_media"  : id_media,
+            "title"     : title,
+            "artists"   : artists,
+            "groups"    : groups,
+            "category"  : category,
+            "series"    : series,
+            "languages" : languages,
+            "tags"      : tags
+        }
+
+    def get_imgs(self, id):
+        data = self._get(f"/galleries/{id}")
+        if data is None:
+            return None
+        
+        sub     = random.choice(["i1", "i2", "i3", "i4"])
+        base    = self.BASE_URL.replace("/api/v2", "")
+        cdn     = base.replace("https://", f"https://{sub}.")
+        imgs    = [f"{cdn}/{page['path']}" for page in data.get("pages", [])]
+
+        return imgs
+
+
+
+# DEBUG/LOGS
+client = NHentaiClient()
+gal_id = "571652"                # replace GALLERY_ID with an actual ID
+result = client.get_info(gal_id) # replace GALLERY_ID with an actual ID 
+if result:
+    print(f"ID        : {result['id']}")
+    print(f"Media ID  : {result['id_media']}")
+    print(f"Title     : {result['title']}")
+    print(f"Artists   : {result['artists']}")
+    print(f"Groups    : {result['groups']}")
+    print(f"Lang      : {result['languages']}")
+    print(f"Series    : {result['series']}")
+    print(f"Category  : {result['category']}")
+    print(f"Tags      : {result['tags']}")
+
+pages = client.get_imgs(gal_id)
+if pages:
+    for i, url in enumerate(pages, start=1):
+        print(f"  [{i:03d}] {url}")
