@@ -4,7 +4,7 @@ import time
 from dotenv import load_dotenv
 from pathlib import Path
 import random
-import re
+
 
 load_dotenv(dotenv_path=Path(__file__).parent / ".env")
 API = os.getenv("API_KEY")
@@ -37,9 +37,10 @@ class NHentaiClient:
                     requests.exceptions.HTTPError):
                 break
         return None
+    
 
     def get_info(self, id):
-        gal = self._get(f"/galleries/{id}")  # _get already returns parsed JSON
+        gal = self._get(f"/galleries/{id}")
         if gal is None:
             return None
         id          = gal['id']
@@ -77,6 +78,7 @@ class NHentaiClient:
             "tags"      : tags
         }
 
+
     def get_imgs(self, id):
         data = self._get(f"/galleries/{id}")
         if data is None:
@@ -88,6 +90,7 @@ class NHentaiClient:
         imgs    = [f"{cdn}/{page['path']}" for page in data.get("pages", [])]
 
         return imgs
+
 
 
 
@@ -106,7 +109,8 @@ if result:
     print(f"Category  : {result['category']}")
     print(f"Tags      : {result['tags']}")
 
+    
 pages = client.get_imgs(gal_id)
 if pages:
     for i, url in enumerate(pages, start=1):
-        print(f"  [{i:03d}] {url}")
+        print(f"{url}")

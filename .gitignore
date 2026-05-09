@@ -106,3 +106,7 @@ call cmd.bat
 .github
 .temp
 .vscode
+
+#
+node_modules
+/src/generated/prisma

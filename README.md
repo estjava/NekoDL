@@ -29,7 +29,7 @@
 
 ## Demo
 <p align="center">
-  <img src="imgs/how_to_download.gif"/>
+  <img src=".docs/imgs/how_to_download.gif"/>
 </p>
 
 ## Features

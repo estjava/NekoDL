@@ -1,7 +1,0 @@
-beautifulsoup4==4.14.3
-downloader==0.98
-requests==2.33.1
-fastapi
-uvicorn[standard]
-requests
-python-dotenv
